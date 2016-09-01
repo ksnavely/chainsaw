@@ -1,13 +1,18 @@
 /*
   Text-to-Morse converter
 
-  Blinks morse of TEXT out on pin 13 LED.
+  Translates input text into morse code voltage out.
+
+  Input is handled via the Serial interface, text must be newline terminated.
+  Supported characters are in the `encoding` struct.
+
+  Output is digital voltage high to PIN. 13 has an LED most of the time.
 
   (c) Kyle Snavely 2016
 */
 
 // Pin 13 has an LED connected on most Arduino boards.
-int LED = 13;
+int PIN = 13;
 int TUNIT = 75; // ms, base time unit
 String TEXT = "I LOVE EMILY";
 
@@ -78,8 +83,8 @@ void setup() {
     ; // wait for serial port to connect.
   }
   // initialize the digital pin as an output.
-  pinMode(LED, OUTPUT);
-  digitalWrite(LED, LOW);
+  pinMode(PIN, OUTPUT);
+  digitalWrite(PIN, LOW);
   Serial.flush();
   Serial.println("Setup complete...");
   Serial.println("\nWaiting for input text...");
@@ -112,29 +117,29 @@ void loop() {
 
 void blink_long(){
   /* Do a long led blink */
-  digitalWrite(LED, HIGH);
+  digitalWrite(PIN, HIGH);
   delay(3*TUNIT);
-  digitalWrite(LED, LOW);
+  digitalWrite(PIN, LOW);
   delay(TUNIT);
 }
 
 void blink_short(){
   /* Do a short led blink */
-  digitalWrite(LED, HIGH);
+  digitalWrite(PIN, HIGH);
   delay(TUNIT);
-  digitalWrite(LED, LOW);
+  digitalWrite(PIN, LOW);
   delay(TUNIT);
 }
 
 void word_gap(){
   /* Go low for 7 units */
-  digitalWrite(LED, LOW);
+  digitalWrite(PIN, LOW);
   delay(7*TUNIT);
 }
 
 void char_gap(){
   /* Go low for 3 units */
-  digitalWrite(LED, LOW);
+  digitalWrite(PIN, LOW);
   delay(3*TUNIT);
 }
 
@@ -142,7 +147,7 @@ void char_gap(){
 
 void loop_gap(){
   /* Go low for 28 units */
-  digitalWrite(LED, LOW);
+  digitalWrite(PIN, LOW);
   delay(28*TUNIT);
 }
 
