@@ -8,6 +8,18 @@
 
   Output is digital voltage high to PIN. 13 has an LED most of the time.
 
+  Example session:
+
+	```
+	Setup complete...
+
+	Waiting for input text...
+	Text: TEST
+	Morse: - . ... - 
+
+	Waiting for input text...
+	```
+
   (c) Kyle Snavely 2016
 */
 
