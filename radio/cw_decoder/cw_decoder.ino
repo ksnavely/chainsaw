@@ -74,23 +74,37 @@ static const struct {const char letter, *morse;} encoding[] =
 // the setup routine runs once when you press reset:
 void setup() {
   Serial.begin(115200);
-  while (!Serial) { 
+  while (!Serial) {
     ; // wait for serial port to connect.
   }
   // initialize the digital pin as an output.
   pinMode(LED, OUTPUT);
   digitalWrite(LED, LOW);
+  Serial.flush();
   Serial.println("Setup complete...");
+  Serial.println("\nWaiting for input text...");
 }
 
 void loop() {
-  TEXT.toUpperCase();
-  Serial.println("Text: " + TEXT);
-  String morse = ascii_to_morse(TEXT);
-  Serial.println("Morse: " + morse);
-  int i;
-  for (i = 0; i < morse.length(); i++){
-    handle_char(morse[i]);
+  // Wait for serial input, terminated by a newline
+  while (Serial.available() > 0) {
+    // Load the input
+    String text;
+    text = Serial.readStringUntil('\n');
+	text.toUpperCase();
+	Serial.println("Text: " + text);
+
+    // Convert to morse code
+	String morse = ascii_to_morse(text);
+	Serial.println("Morse: " + morse);
+
+    // Transmit morse on the configured pin
+	int i;
+	for (i = 0; i < morse.length(); i++){
+	  handle_char(morse[i]);
+	}
+
+    Serial.println("\nWaiting for input text...");
   }
 }
 
