@@ -1,5 +1,4 @@
 # cw_decoder
- - accept serial input, translate to morse
 
 # arduino
 
