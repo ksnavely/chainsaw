@@ -24,8 +24,10 @@
 */
 
 // Pin 13 has an LED connected on most Arduino boards.
+// Warning! Pin 13 is used on boot, will broadcast tones if connected
+// to transmitter
 int PIN = 13;
-int TUNIT = 75; // ms, base time unit
+int TUNIT = 45; // ms, base time unit
 String TEXT = "I LOVE EMILY";
 
 // Text to morse map, ITU, symbols from wikipedia
@@ -85,10 +87,10 @@ static const struct {const char letter, *morse;} encoding[] =
   { '$', "...-..-"},
   { '"', ".-..-." },
   { '@', ".--.-." },
-  { ' ', "     " } //word gap is seven time units
+  { ' ', "     " } // word gap is seven time units
 };
 
-// the setup routine runs once when you press reset:
+// the setup routine runs on boot and when you press reset:
 void setup() {
   Serial.begin(115200);
   while (!Serial) {
