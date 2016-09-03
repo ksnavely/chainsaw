@@ -28,7 +28,6 @@
 // to transmitter
 int PIN = 13;
 int TUNIT = 45; // ms, base time unit
-String TEXT = "I LOVE EMILY";
 
 // Text to morse map, ITU, symbols from wikipedia
 static const struct {const char letter, *morse;} encoding[] =
